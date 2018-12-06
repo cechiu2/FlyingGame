@@ -1,6 +1,7 @@
 package com.example.claire.flyinggame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,10 +12,16 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * hm...
  */
 public class GameView extends View {
+
+    //access score in game over screen
+    public static String scoreString;
+    public static String EXTRA_MESSAGE = "com.example.claire.flyinggame.SCORE";
 
     //canvas
     private int canvasWidth;
@@ -135,7 +142,11 @@ public class GameView extends View {
             life_count--;
             if (life_count == 0) {
                 //game over
-                Log.v("MESSAGE", "GAME OVER");
+                //Log.v("MESSAGE", "GAME OVER");
+                Intent intent = new Intent;
+                intent.putExtra(EXTRA_MESSAGE, score);
+                scoreString = "" + score;
+                startActivity(intent);
             }
         }
         if (blackX < 0) {
