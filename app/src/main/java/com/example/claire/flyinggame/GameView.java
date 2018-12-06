@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -148,10 +149,11 @@ public class GameView extends View {
             if (life_count == 0) {
                 //game over
                 //Log.v("MESSAGE", "GAME OVER");
-                Intent intent = new Intent;
-                intent.putExtra(EXTRA_MESSAGE, score);
+                Intent intent = new Intent(this.getContext(), GameOver.class);
+                Bundle b = new Bundle();
+                b.putInt(EXTRA_MESSAGE, score);
                 scoreString = "" + score;
-                startActivity(intent);
+                startActivity(this.getContext(), intent, b);
             }
         }
         if (blackX < 0) {
