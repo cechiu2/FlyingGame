@@ -154,11 +154,11 @@ public class GameView extends View {
         canvas.drawText("Score : " + score, 20, 60, scorePaint);
 
         //level
-        canvas.drawText("Health", canvasWidth / 2, 60, levelPaint);
+        canvas.drawText("Health:", canvasWidth / 2, 60, levelPaint);
 
         //life
         for (int i = 0; i < 3; i++) {
-            int x = (int)(560 + life[0].getWidth() * 1.5 * i);
+            int x = (int)(600 + life[0].getWidth() * 1.5 * i);
             int y = 30;
 
             if (i < life_count) {
