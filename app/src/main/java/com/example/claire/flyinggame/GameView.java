@@ -38,13 +38,15 @@ public class GameView extends View {
     private int blueX;
     private int blueY;
     private int blueSpeed = 15;
-    private Paint bluePaint = new Paint();
+    //private Paint bluePaint = new Paint();
+    private Bitmap cs125[] = new Bitmap[1];
 
     //black ball
     private int blackX;
     private int blackY;
     private int blackSpeed = 20;
-    private Paint blackPaint = new Paint();
+    //private Paint blackPaint = new Paint();
+    private Bitmap checkstyle[] = new Bitmap[1];
 
     //background
     private Bitmap bgImage;
@@ -67,16 +69,18 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
 
-        bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.bird1);
-        bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.bird2);
+        bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.bird3);
+        bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.bird4);
 
         bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
 
-        bluePaint.setColor(Color.BLUE);
-        bluePaint.setAntiAlias(false);
+        cs125[0] = BitmapFactory.decodeResource(getResources(), R.drawable.cs125);
+        //bluePaint.setColor(Color.BLUE);
+        //bluePaint.setAntiAlias(false);
 
-        blackPaint.setColor(Color.BLACK);
-        blackPaint.setAntiAlias(false);
+        checkstyle[0] = BitmapFactory.decodeResource(getResources(), R.drawable.checkstyle);
+        //blackPaint.setColor(Color.BLACK);
+        //blackPaint.setAntiAlias(false);
 
         scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(32);
@@ -133,7 +137,8 @@ public class GameView extends View {
             blueX = canvasWidth + 20;
             blueY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY)) + minBirdY;
         }
-        canvas.drawCircle(blueX, blueY, 10, bluePaint);
+        //canvas.drawCircle(blueX, blueY, 10, bluePaint);
+        canvas.drawBitmap(cs125[0], blueX, blueY, null);
 
         //black
         blackX -= blackSpeed;
@@ -153,17 +158,18 @@ public class GameView extends View {
             blackX = canvasWidth + 200;
             blackY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY)) + minBirdY;
         }
-        canvas.drawCircle(blackX, blackY, 20, blackPaint);
+        //canvas.drawCircle(blackX, blackY, 20, blackPaint);
+        canvas.drawBitmap(checkstyle[0], blackX, blackY, null);
 
         //score
         canvas.drawText("Score : " + score, 20, 60, scorePaint);
 
         //level
-        canvas.drawText("Lv. 1", canvasWidth / 2, 60, levelPaint);
+        canvas.drawText("Health:", canvasWidth / 2, 60, levelPaint);
 
         //life
         for (int i = 0; i < 3; i++) {
-            int x = (int)(560 + life[0].getWidth() * 1.5 * i);
+            int x = (int)(600 + life[0].getWidth() * 1.5 * i);
             int y = 30;
 
             if (i < life_count) {
