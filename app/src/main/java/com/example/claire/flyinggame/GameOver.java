@@ -2,6 +2,7 @@ package com.example.claire.flyinggame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,25 @@ public class GameOver extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView);
         textView.setText(scoreDisplayed);
 
+        int score;
+        try {
+            SharedPreferences prefs = this.getSharedPreferences("best", Context.MODE_PRIVATE);
+            score = prefs.getInt("highscore", 0);
+            if (score < Integer.parseInt(GameView.scoreString)) {
+                score = Integer.parseInt(GameView.scoreString);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("highscore", score);
+                editor.commit();
+            }
+        } catch (NullPointerException e) {
+            SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("highscore", Integer.parseInt(GameView.scoreString));
+            editor.commit();
+            score = Integer.parseInt(GameView.scoreString);
+        }
+
+        /*
         //high score
         String highscore;
         try {
@@ -45,9 +65,9 @@ public class GameOver extends AppCompatActivity {
             } catch (Exception f) {
                 e.printStackTrace();
             }
-        }
+        } */
 
         TextView textView4 = findViewById(R.id.textView4);
-        textView4.setText("Highscore: " + highscore);
+        textView4.setText("Highscore: " + score);
     }
 }
